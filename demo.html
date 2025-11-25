@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cam-Bin Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1 class="logo">Cam-Bin</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="demo.html">Demo</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <div class="container">
+            <h2>Try the Cam-Bin Demo</h2>
+            <p>Upload an image of your trash and type its name to see which bin it belongs in!</p>
+
+            <form id="demoForm">
+                <input type="text" id="trashName" placeholder="Enter trash name" required>
+                <input type="file" id="trashImage" accept="image/*" required>
+                <button type="submit" class="button" id="classifyBtn">Classify Trash</button>
+            </form>
+
+            <div id="result" class="result-box">
+                <!-- Result will appear here -->
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
