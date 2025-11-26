@@ -8,23 +8,20 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const { trashName, imageBase64 } = req.body;
+    const { trashName } = req.body;
 
-    if (!trashName || !imageBase64) {
-      return res.status(400).json({ error: "Missing trash name or image" });
+    if (!trashName) {
+      return res.status(400).json({ error: "Missing trash name" });
     }
 
-    // Send image + text to GPT-4o-mini
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
           role: "user",
-          content: `Classify this trash: ${trashName}. Options: recycling, compost, landfill. Image is provided.`
+          content: `Classify this trash: ${trashName}. Options: recycling, compost, landfill.`
         }
-      ],
-      // new field for the image
-      input_image: imageBase64
+      ]
     });
 
     const answer = response.choices[0].message.content;
@@ -34,4 +31,5 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "AI classification failed", details: err.message });
   }
 }
+
 
