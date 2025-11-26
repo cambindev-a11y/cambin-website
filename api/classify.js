@@ -4,29 +4,34 @@ export default async function handler(req, res) {
   try {
     const openai = new OpenAI({ apiKey: process.env.AIAPIKEY });
 
-    // Get uploaded image from request body
-    const chunks = [];
-    for await (const chunk of req) chunks.push(chunk);
-    const imageBuffer = Buffer.concat(chunks);
+    if (req.method !== "POST") {
+      return res.status(405).json({ error: "Method not allowed" });
+    }
 
-    // Send image to OpenAI Vision model
+    const { trashName, imageBase64 } = req.body;
+
+    if (!trashName || !imageBase64) {
+      return res.status(400).json({ error: "Missing trash name or image" });
+    }
+
+    // Send image + text to GPT-4o-mini
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
           role: "user",
-          content: [
-            { type: "text", text: "Classify this trash: recycling, compost, landfill only." },
-            { type: "input_image", image: imageBuffer.toString("base64") }
-          ]
+          content: `Classify this trash: ${trashName}. Options: recycling, compost, landfill. Image is provided.`
         }
-      ]
+      ],
+      // new field for the image
+      input_image: imageBase64
     });
 
     const answer = response.choices[0].message.content;
     res.status(200).json({ result: answer });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "AI classification failed" });
+    res.status(500).json({ error: "AI classification failed", details: err.message });
   }
 }
+

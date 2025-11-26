@@ -1,25 +1,27 @@
-document.getElementById("demoForm").addEventListener("submit", async (e) => {
+const form = document.getElementById("demoForm");
+const resultBox = document.getElementById("result");
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const image = document.getElementById("trashImage").files[0];
-  if (!image) {
-    alert("Please upload an image.");
-    return;
-  }
+  const trashName = document.getElementById("trashName").value;
+  const file = document.getElementById("trashImage").files[0];
 
-  const resultBox = document.getElementById("result");
-  resultBox.textContent = "Processing...";
+  if (!file) return alert("Upload an image");
 
-  const response = await fetch("/api/classify", {
-    method: "POST",
-    body: image,
-  });
+  // Convert image to base64
+  const reader = new FileReader();
+  reader.onload = async () => {
+    const imageBase64 = reader.result.split(",")[1];
 
-  const data = await response.json();
+    const res = await fetch("/api/classify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ trashName, imageBase64 })
+    });
 
-  if (data.error) {
-    resultBox.textContent = "Error: " + data.error;
-  } else {
-    resultBox.textContent = "Result: " + data.result;
-  }
+    const data = await res.json();
+    resultBox.textContent = data.result || data.error;
+  };
+  reader.readAsDataURL(file);
 });
