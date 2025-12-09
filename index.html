@@ -6,6 +6,34 @@
     <title>Cam-Bin | Smart Waste Sorting</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
+<script>
+async function loadCounter() {
+    try {
+        const res = await fetch("/api/get-count");
+        const data = await res.json();
+
+        const el = document.getElementById("userCount");
+        let current = 0;
+        const target = data.count;
+        const speed = 20;
+
+        const animate = () => {
+            if (current < target) {
+                current += Math.ceil((target - current) / 20);
+                el.textContent = current.toLocaleString();
+                requestAnimationFrame(animate);
+            } else {
+                el.textContent = target.toLocaleString();
+            }
+        };
+        animate();
+    } catch {}
+}
+
+loadCounter();
+</script>
+
 <body>
 
     <!-- Navbar -->
@@ -32,6 +60,10 @@
             <a href="demo.html" class="button">Try the Demo</a>
         </div>
     </div>
+    <section class="counter-section">
+    <h2>Join <span id="userCount">0</span> people who have used Cam-Bin!</h2>
+    </section>
+
 </section>
     <script src="script.js"></script>
 </body>

@@ -191,3 +191,11 @@ body {
     color: #2ecc71; /* make the email link pop */
     text-decoration: underline;
 }
+
+.counter-section {
+    text-align: center;
+    margin: 60px 0;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+}

@@ -27,7 +27,11 @@ form.addEventListener("submit", async (e) => {
 
       if (data.result) {
         resultBox.textContent = data.result;
-      } else if (data.error) {
+
+        // ⭐ NEW: Update visitor count ONLY after a successful AI classification
+        await fetch("/api/increment", { method: "POST" });
+      } 
+      else if (data.error) {
         resultBox.textContent = `Error: ${data.error}`;
       }
     } catch (err) {
@@ -38,3 +42,4 @@ form.addEventListener("submit", async (e) => {
 
   reader.readAsDataURL(file);
 });
+
