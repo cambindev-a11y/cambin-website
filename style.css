@@ -194,11 +194,11 @@ body {
 
 .counter-section {
   padding: 80px 20px;
-  background: #e60707; /* light background */
+  background: #03e43b; /* light background */
   text-align: center;
   font-size: 32px;
   font-weight: bold;
-  color: #2ecc71; /* match your branding */
+  color: #f7f8f7; /* match your branding */
 }
 
 .counter-section .container {
