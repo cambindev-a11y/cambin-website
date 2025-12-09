@@ -194,14 +194,39 @@ body {
 
 .counter-section {
   padding: 80px 20px;
-  background: #03e43b; /* light background */
+  background: #e4e7e4; /* light background */
   text-align: center;
   font-size: 32px;
   font-weight: bold;
-  color: #f7f8f7; /* match your branding */
+  color: #eb1607; /* match your branding */
 }
 
 .counter-section .container {
   max-width: 800px;
   margin: 0 auto;
+}
+
+/* Scroll down arrow */
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: white;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+/* Simple bounce animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-15px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-7px);
+    }
 }
