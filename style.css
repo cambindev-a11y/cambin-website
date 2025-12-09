@@ -81,6 +81,24 @@ body {
     margin-bottom: 30px;
 }
 
+.hero-content .button {
+    padding: 15px 30px;
+    background: #2ecc71;
+    color: white;
+    border-radius: 50px; /* more rounded for bubble look */
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content .button:hover {
+    background: #27ae60;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+
 /* Scroll down arrow */
 .scroll-down {
     position: absolute;
