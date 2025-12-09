@@ -193,9 +193,15 @@ body {
 }
 
 .counter-section {
-    text-align: center;
-    margin: 60px 0;
-    font-size: 2rem;
-    font-weight: 600;
-    color: white;
+  padding: 80px 20px;
+  background: #e60707; /* light background */
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2ecc71; /* match your branding */
+}
+
+.counter-section .container {
+  max-width: 800px;
+  margin: 0 auto;
 }
